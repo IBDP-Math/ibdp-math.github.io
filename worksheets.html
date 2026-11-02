@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Worksheets · IBDP Math</title>
+<meta name="description" content="Free original IB DP Mathematics worksheets, notes and practice for AA and AI, SL and HL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]]}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header id="header"></header>
+<main class="wrap">
+
+<section>
+  <h2>Worksheets</h2>
+  <p class="lead">Download a worksheet, try it, then check the worked solutions.</p>
+  <div class="filters" id="filters"></div>
+  <div id="list"></div>
+</section>
+</main>
+<footer id="footer"></footer>
+<script src="assets/site.js"></script>
+<script src="assets/worksheets.js"></script>
+<script>
+const courses=["All","AA SL","AA HL","AI SL","AI HL"];let cur="All";
+function draw(){
+  document.getElementById("filters").innerHTML=courses.map(c=>`<button class="${c===cur?"on":""}" onclick="cur=\x27${c}\x27;draw()">${c}</button>`).join("");
+  const items=WORKSHEETS.filter(w=>cur==="All"||w.course===cur);
+  document.getElementById("list").innerHTML=items.length?items.map(w=>`
+   <div class="ws"><div><span class="pill">${w.course}</span><small>${w.topic}</small><h3>${w.title}</h3></div>
+   <div class="links"><a href="${w.file}" target="_blank">Worksheet ↓</a>${w.solutions?`<a href="${w.solutions}" target="_blank">Solutions ↓</a>`:""}</div></div>`).join("")
+   :`<p class="empty">Worksheets for ${cur} are coming soon.</p>`;
+}
+draw();
+</script>
+</body>
+</html>
